@@ -21,6 +21,7 @@
 #import "shared_realm.hpp"
 
 #import <realm/group.hpp>
+#import <unordered_map>
 
 namespace realm {
     class Group;
@@ -28,9 +29,20 @@ namespace realm {
     typedef std::shared_ptr<realm::Realm> SharedRealm;
 }
 
+struct RLMObjectInfo;
+
+namespace std {
+template<> struct hash<NSString *> {
+    size_t operator()(__unsafe_unretained NSString *const str) const {
+        return [str hash];
+    }
+};
+}
+
 @interface RLMRealm () {
     @public
     realm::SharedRealm _realm;
+    std::unordered_map<NSString *, RLMObjectInfo> _info;
 }
 
 // FIXME - group should not be exposed

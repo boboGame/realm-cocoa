@@ -31,12 +31,7 @@ namespace realm {
 class RLMObservationInfo;
 
 // RLMObjectSchema private
-@interface RLMObjectSchema () {
-    @public
-    std::vector<RLMObservationInfo *> _observedObjects;
-}
-@property (nonatomic) realm::Table *table;
-
+@interface RLMObjectSchema ()
 // shallow copy reusing properties and property map
 - (instancetype)shallowCopy;
 
