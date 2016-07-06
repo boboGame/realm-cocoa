@@ -17,24 +17,24 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
+
 #import <vector>
 
 namespace realm {
+    class Group;
     class Query;
     struct SortOrder;
     class Table;
     class TableView;
 }
 
-@class RLMObjectSchema;
-@class RLMProperty;
-@class RLMSchema;
+@class RLMObjectSchema, RLMProperty, RLMSchema;
 
 extern NSString * const RLMPropertiesComparisonTypeMismatchException;
 extern NSString * const RLMUnsupportedTypesFoundInPropertyComparisonException;
 
 realm::Query RLMPredicateToQuery(NSPredicate *predicate, RLMObjectSchema *objectSchema,
-                                 RLMSchema *schema);
+                                 RLMSchema *schema, realm::Group &group);
 
 // return property - throw for invalid column name
 RLMProperty *RLMValidatedProperty(RLMObjectSchema *objectSchema, NSString *columnName);
